@@ -1,12 +1,16 @@
+from django.core.validators import MaxValueValidator
 from django.db import models
 
 
 # Create your models here.
-class BPM(models.Model):
-    make_text = models.CharField(max_length = 200)
-    model_text = models.CharField(max_length = 200)
-    year_number = models.IntegerField(max_length = 4)
+class CarBPM(models.Model):
+    car_make_text = models.CharField("Car Make", max_length = 200)
+    car_model_text = models.CharField("Car Model", max_length = 200)
+    car_year_number = models.PositiveIntegerField("Car Year", validators = [MaxValueValidator(9999)])
 
-    bpm_number = models.IntegerField(max_length = 3)
+    car_bpm_number = models.PositiveIntegerField("Car BPM", validators = [MaxValueValidator(999)])
 
-    last_updated_number = models.DateTimeField('last updated')
+    car_last_updated_date = models.DateTimeField("Last Modified")
+
+    def __str__(self):
+        return f"{self.car_make_text} {self.car_model_text} ({self.car_year_number}) - {self.car_bpm_number}"

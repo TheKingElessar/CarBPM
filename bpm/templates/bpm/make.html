@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ make_string }}</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div class="summary">
+</div>
+<div class="car-list">
+    <table style="width:50%" align="center">
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>BPM</th>
+            <th>Last Modified</th>
+        </tr>
+
+        {% for car in make_list %}
+        <tr>
+            <td>
+                <a href="{% url 'make' car.car_make_text %}">{{ car.car_make_text }}</a>
+            </td>
+            <td>
+                <a href="{% url 'model' car.car_make_text car.car_model_text %}">{{ car.car_model_text }}</a>
+            </td>
+            <td>
+                <a href="{% url 'year' car.car_make_text car.car_model_text car.car_year_number %}">{{ car.car_year_number }}</a>
+            </td>
+            <td>
+                {{ car.car_bpm_number }}
+            </td>
+            <td>
+                {{ car.car_last_updated_date }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
